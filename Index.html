@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MecaKids - Aprende Mecanografía Jugando</title>
+    <!-- Tailwind CSS para un diseño moderno -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Fredoka para un estilo infantil y amigable -->
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Confetti para recompensas -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+    <style>
+        body { font-family: 'Fredoka', sans-serif; }
+        .key { transition: all 0.1s ease; }
+        .key-active { transform: scale(0.92); background-color: #38bdf8 !important; color: white !important; box-shadow: 0 0 15px #38bdf8; }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-indigo-50 via-purple-50 to-pink-50 min-h-screen text-slate-700 flex flex-col justify-between">
+
+    <!-- HEADER / NAVEGACIÓN -->
+    <header class="bg-white shadow-md py-4 px-6 flex justify-between items-center rounded-b-3xl max-w-5xl mx-auto w-full mt-2">
+        <div class="flex items-center space-x-3">
+            <span class="text-4xl">🐱‍💻</span>
+            <div>
+                <h1 class="text-2xl font-bold text-indigo-600">MecaKids</h1>
+                <p class="text-xs text-slate-400">Aprende a teclear divirtiéndote</p>
+            </div>
+        </div>
+        <div class="flex items-center space-x-6">
+            <div class="bg-amber-100 text-amber-800 px-4 py-1.5 rounded-full font-bold flex items-center shadow-inner">
+                ⭐ <span id="score" class="ml-1 text-lg">0</span>
+            </div>
+            <div id="user-badge" class="bg-indigo-100 text-indigo-700 px-4 py-1.5 rounded-full font-semibold text-sm">
+                Nivel: Principiante 🐣
+            </div>
+        </div>
+    </header>
+
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="max-w-4xl mx-auto px-4 py-8 w-full flex-grow flex flex-col items-center">
+
+        <!-- MENÚ DE SELECCIÓN DE MODOS -->
+        <div id="main-menu" class="w-full text-center">
+            <h2 class="text-3xl font-bold text-indigo-900 mb-2">¡Elige una aventura!</h2>
+            <p class="text-slate-500 mb-8">Selecciona qué te apetece hacer hoy</p>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+                <button onclick="startLessons()" class="bg-gradient-to-r from-blue-500 to-indigo-600 hover:from-blue-600 hover:to-indigo-700 text-white p-6 rounded-3xl shadow-lg transform hover:-translate-y-1 transition duration-200 flex flex-col items-center">
+                    <span class="text-5xl mb-3">📚</span>
+                    <span class="text-xl font-bold">Lecciones Guiadas</span>
+                    <span class="text-xs opacity-80 mt-1">Aprende paso a paso con las letras y palabras</span>
+                </button>
+                <button onclick="startMiniGame()" class="bg-gradient-to-r from-pink-500 to-rose-600 hover:from-pink-600 hover:to-rose-700 text-white p-6 rounded-3xl shadow-lg transform hover:-translate-y-1 transition duration-200 flex flex-col items-center">
+                    <span class="text-5xl mb-3">🚀</span>
+                    <span class="text-xl font-bold">Lluvia de Palabras</span>
+                    <span class="text-xs opacity-80 mt-1">Minijuego arcade para practicar velocidad</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- CONTENEDOR DE LECCIONES -->
+        <div id="lessons-container" class="w-full hidden flex flex-col items-center">
+            <div class="w-full flex justify-between items-center mb-6">
+                <button onclick="backToMenu()" class="bg-white hover:bg-slate-100 text-slate-600 px-4 py-2 rounded-xl font-bold shadow transition flex items-center text-sm">
+                    ⬅ Volver al Menú
+                </button>
+                <h3 id="lesson-title" class="text-xl font-bold text-indigo-800">Lección 1: Fila Central</h3>
+                <span id="lesson-progress" class="text-sm font-semibold text-slate-400">1 / 5</span>
+            </div>
+
+            <!-- Panel de Ejercicio -->
+            <div class="bg-white w-full rounded-3xl shadow-xl p-8 mb-6 text-center border-4 border-indigo-100">
+                <div id="target-display" class="text-6xl font-bold tracking-widest text-indigo-600 mb-6 bg-indigo-50 py-8 rounded-2xl shadow-inner min-h-[140px] flex items-center justify-center">
+                    a s d f
+                </div>
+                <p class="text-slate-400 text-sm">Escribe la letra o palabra que ves arriba usando el teclado físico.</p>
+            </div>
+
+            <!-- Teclado Visual -->
+            <div class="bg-slate-900 p-4 rounded-3xl shadow-2xl w-full max-w-3xl flex flex-col gap-2 items-center">
+                <!-- Fila 1 -->
+                <div class="flex gap-1.5">
+                    <div id="key-q" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">Q</div>
+                    <div id="key-w" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">W</div>
+                    <div id="key-e" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">E</div>
+                    <div id="key-r" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">R</div>
+                    <div id="key-t" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">T</div>
+                    <div id="key-y" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">Y</div>
+                    <div id="key-u" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">U</div>
+                    <div id="key-i" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">I</div>
+                    <div id="key-o" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">O</div>
+                    <div id="key-p" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">P</div>
+                </div>
+                <!-- Fila 2 -->
+                <div class="flex gap-1.5">
+                    <div id="key-a" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">A</div>
+                    <div id="key-s" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">S</div>
+                    <div id="key-d" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">D</div>
+                    <div id="key-f" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">F</div>
+                    <div id="key-g" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">G</div>
+                    <div id="key-h" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">H</div>
+                    <div id="key-j" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">J</div>
+                    <div id="key-k" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">K</div>
+                    <div id="key-l" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">L</div>
+                </div>
+                <!-- Fila 3 -->
+                <div class="flex gap-1.5">
+                    <div id="key-z" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">Z</div>
+                    <div id="key-x" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">X</div>
+                    <div id="key-c" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">C</div>
+                    <div id="key-v" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">V</div>
+                    <div id="key-b" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">B</div>
+                    <div id="key-n" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">N</div>
+                    <div id="key-m" class="key bg-slate-700 text-white w-10 h-10 rounded-xl flex items-center justify-center font-bold text-sm">M</div>
+                </div>
+                <!-- Barra espaciadora -->
+                <div class="flex gap-1.5 mt-1 w-full justify-center">
+                    <div id="key- " class="key bg-slate-700 text-white w-64 h-10 rounded-xl flex items-center justify-center font-bold text-xs">ESPACIO</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MINIJUEGO DE LLUVIA DE PALABRAS -->
+        <div id="game-container" class="w-full hidden flex flex-col items-center">
+            <div class="w-full flex justify-between items-center mb-4">
+                <button onclick="backToMenu()" class="bg-white hover:bg-slate-100 text-slate-600 px-4 py-2 rounded-xl font-bold shadow transition flex items-center text-sm">
+                    ⬅ Volver al Menú
+                </button>
+                <div class="text-rose-600 font-bold text-lg">❤️ Vidas: <span id="game-lives">3</span></div>
+            </div>
+            <div id="game-arena" class="relative bg-slate-900 w-full h-96 rounded-3xl overflow-hidden shadow-2xl border-4 border-rose-100 flex items-end justify-center p-6">
+                <div id="falling-word" class="absolute top-0 text-3xl font-extrabold text-yellow-300 transition-all duration-75">gato</div>
+                <input type="text" id="game-input" autofocus class="bg-slate-800 text-white text-center text-xl font-bold py-3 px-6 rounded-2xl outline-none border-2 border-indigo-500 w-full max-w-md shadow-inner" placeholder="Escribe aquí la palabra que cae...">
+            </div>
+        </div>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="text-center py-4 text-xs text-slate-400">
+        MecaKids • Diseñado para aprender jugando 🌟
+    </footer>
+
+    <!-- LÓGICA DE LA APLICACIÓN -->
+    <script>
+        let score = 0;
+        let currentLessonIndex = 0;
+        let currentItemIndex = 0;
+
+        const lessons = [
+            { title: "Lección 1: Fila Base (A, S, D, F)", items: ["a", "s", "d", "f", "as", "df", "fad"] },
+            { title: "Lección 2: Fila Base Derecha (J, K, L)", items: ["j", "k", "l", "jk", "kl", "dad", "fall"] },
+            { title: "Lección 3: Palabras Cortas", items: ["sol", "luna", "casa", "pato", "agua", "mesa"] },
+            { title: "Lección 4: Frases Divertidas", items: ["el gato duerme", "la casa es azul", "juego con amigos"] }
+        ];
+
+        let gameInterval;
+        let wordTop = 0;
+        let currentWord = "gato";
+        let lives = 3;
+        const wordsList = ["gato", "perro", "sol", "luna", "agua", "casa", "mesa", "flor", "libro", "juego"];
+
+        function updateScore(points) {
+            score += points;
+            document.getElementById('score').innerText = score;
+            if (score > 20) document.getElementById('user-badge').innerText = "Nivel: Explorador 🚀";
+            if (score > 50) document.getElementById('user-badge').innerText = "Nivel: Maestro del Teclado 🏆";
+        }
+
+        function startLessons() {
+            document.getElementById('main-menu').classList.add('hidden');
+            document.getElementById('lessons-container').classList.remove('hidden');
+            currentLessonIndex = 0;
+            currentItemIndex = 0;
+            loadCurrentItem();
+        }
+
+        function startMiniGame() {
+            document.getElementById('main-menu').classList.add('hidden');
+            document.getElementById('game-container').classList.remove('hidden');
+            lives = 3;
+            document.getElementById('game-lives').innerText = lives;
+            nextGameWord();
+            document.getElementById('game-input').value = "";
+            document.getElementById('game-input').focus();
+            
+            clearInterval(gameInterval);
+            wordTop = 0;
+            gameInterval = setInterval(gameLoop, 50);
+        }
+
+        function backToMenu() {
+            document.getElementById('lessons-container').classList.add('hidden');
+            document.getElementById('game-container').classList.add('hidden');
+            document.getElementById('main-menu').classList.remove('hidden');
+            clearInterval(gameInterval);
+        }
+
+        function loadCurrentItem() {
+            const lesson = lessons[currentLessonIndex];
+            document.getElementById('lesson-title').innerText = lesson.title;
+            document.getElementById('lesson-progress').innerText = `${currentItemIndex + 1} / ${lesson.items.length}`;
+            document.getElementById('target-display').innerText = lesson.items[currentItemIndex];
+        }
+
+        // Manejo de pulsaciones de teclas
+        document.addEventListener('keydown', (e) => {
+            const key = e.key.toLowerCase();
+            highlightKey(key);
+
+            // Si estamos en lecciones
+            if (!document.getElementById('lessons-container').classList.contains('hidden')) {
+                const currentTarget = lessons[currentLessonIndex].items[currentItemIndex];
+                // Lógica simple de avance por caracteres o palabra exacta
+                currentItemIndex++;
+                updateScore(5);
+                
+                if (currentItemIndex >= lessons[currentLessonIndex].items.length) {
+                    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
+                    currentLessonIndex = (currentLessonIndex + 1) % lessons.length;
+                    currentItemIndex = 0;
+                }
+                loadCurrentItem();
+            }
+        });
+
+        // Minijuego input detector
+        const gameInput = document.getElementById('game-input');
+        if (gameInput) {
+            gameInput.addEventListener('input', (e) => {
+                if (e.target.value.trim().toLowerCase() === currentWord) {
+                    updateScore(10);
+                    confetti({ particleCount: 50, spread: 50, origin: { y: 0.7 } });
+                    e.target.value = "";
+                    nextGameWord();
+                }
+            });
+        }
+
+        function nextGameWord() {
+            currentWord = wordsList[Math.floor(Math.random() * wordsList.length)];
+            document.getElementById('falling-word').innerText = currentWord;
+            wordTop = 0;
+        }
+
+        function gameLoop() {
+            if (document.getElementById('game-container').classList.contains('hidden')) return;
+            wordTop += 2;
+            const wordEl = document.getElementById('falling-word');
+            wordEl.style.top = wordTop + 'px';
+
+            if (wordTop > 320) {
+                lives--;
+                document.getElementById('game-lives').innerText = lives;
+                nextGameWord();
+                if (lives <= 0) {
+                    alert("¡Juego terminado! Has conseguido " + score + " puntos.");
+                    backToMenu();
+                }
+            }
+        }
+
+        function highlightKey(char) {
+            let keyEl = document.getElementById('key-' + char);
+            if (keyEl) {
+                keyEl.classList.add('key-active');
+                setTimeout(() => keyEl.classList.remove('key-active'), 150);
+            }
+        }
+    </script>
+</body>
+</html>
