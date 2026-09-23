@@ -71,10 +71,10 @@
 
             <!-- Panel de Ejercicio -->
             <div class="bg-white w-full rounded-3xl shadow-xl p-8 mb-6 text-center border-4 border-indigo-100">
-                <div id="target-display" class="text-6xl font-bold tracking-widest text-indigo-600 mb-6 bg-indigo-50 py-8 rounded-2xl shadow-inner min-h-[140px] flex items-center justify-center">
-                    a s d f
+                <div id="target-display" class="text-5xl font-bold tracking-widest text-indigo-600 mb-6 bg-indigo-50 py-8 rounded-2xl shadow-inner min-h-[140px] flex items-center justify-center">
+                    <!-- Aquí se pintarán las letras con colores según se acierten -->
                 </div>
-                <p class="text-slate-400 text-sm">Escribe la letra o palabra que ves arriba usando el teclado físico.</p>
+                <p id="lesson-feedback" class="text-slate-400 text-sm">Escribe la secuencia que ves arriba usando el teclado físico.</p>
             </div>
 
             <!-- Teclado Visual -->
@@ -147,12 +147,13 @@
         let score = 0;
         let currentLessonIndex = 0;
         let currentItemIndex = 0;
+        let currentCharIndex = 0; // Índice de la letra exacta dentro de la palabra actual
 
         const lessons = [
-            { title: "Lección 1: Fila Base (A, S, D, F)", items: ["a", "s", "d", "f", "as", "df", "fad"] },
-            { title: "Lección 2: Fila Base Derecha (J, K, L)", items: ["j", "k", "l", "jk", "kl", "dad", "fall"] },
-            { title: "Lección 3: Palabras Cortas", items: ["sol", "luna", "casa", "pato", "agua", "mesa"] },
-            { title: "Lección 4: Frases Divertidas", items: ["el gato duerme", "la casa es azul", "juego con amigos"] }
+            { title: "Lección 1: Fila Base (A, S, D, F)", items: ["a", "s", "d", "f", "as", "df"] },
+            { title: "Lección 2: Fila Base Derecha (J, K, L)", items: ["j", "k", "l", "jk", "kl"] },
+            { title: "Lección 3: Palabras Cortas", items: ["sol", "luna", "casa", "pato", "agua"] },
+            { title: "Lección 4: Frases Divertidas", items: ["el gato", "casa azul"] }
         ];
 
         let gameInterval;
@@ -173,6 +174,7 @@
             document.getElementById('lessons-container').classList.remove('hidden');
             currentLessonIndex = 0;
             currentItemIndex = 0;
+            currentCharIndex = 0;
             loadCurrentItem();
         }
 
@@ -201,27 +203,65 @@
             const lesson = lessons[currentLessonIndex];
             document.getElementById('lesson-title').innerText = lesson.title;
             document.getElementById('lesson-progress').innerText = `${currentItemIndex + 1} / ${lesson.items.length}`;
-            document.getElementById('target-display').innerText = lesson.items[currentItemIndex];
+            
+            const targetWord = lesson.items[currentItemIndex];
+            renderTargetWord(targetWord, currentCharIndex);
         }
 
-        // Manejo de pulsaciones de teclas
-        document.addEventListener('keydown', (e) => {
-            const key = e.key.toLowerCase();
-            highlightKey(key);
-
-            // Si estamos en lecciones
-            if (!document.getElementById('lessons-container').classList.contains('hidden')) {
-                const currentTarget = lessons[currentLessonIndex].items[currentItemIndex];
-                // Lógica simple de avance por caracteres o palabra exacta
-                currentItemIndex++;
-                updateScore(5);
-                
-                if (currentItemIndex >= lessons[currentLessonIndex].items.length) {
-                    confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
-                    currentLessonIndex = (currentLessonIndex + 1) % lessons.length;
-                    currentItemIndex = 0;
+        function renderTargetWord(word, typedIndex) {
+            const container = document.getElementById('target-display');
+            container.innerHTML = "";
+            for (let i = 0; i < word.length; i++) {
+                const span = document.createElement('span');
+                span.innerText = word[i] === ' ' ? '␣' : word[i];
+                if (i < typedIndex) {
+                    span.className = "text-emerald-500"; // Letras ya acertadas
+                } else if (i === typedIndex) {
+                    span.className = "text-indigo-600 underline decoration-indigo-400"; // Letra actual parpadeante/activa
+                } else {
+                    span.className = "text-slate-300"; // Letras pendientes
                 }
-                loadCurrentItem();
+                container.appendChild(span);
+            }
+        }
+
+        // Manejo de pulsaciones de teclas en modo Lecciones
+        document.addEventListener('keydown', (e) => {
+            if (document.getElementById('lessons-container').classList.contains('hidden')) return;
+            
+            let key = e.key.toLowerCase();
+            if (e.key === ' ') key = ' '; // Espacio
+
+            highlightKey(e.key === ' ' ? ' ' : key);
+
+            const targetWord = lessons[currentLessonIndex].items[currentItemIndex];
+            const expectedChar = targetWord[currentCharIndex];
+
+            // Comprobamos si la letra pulsada es la correcta
+            if (key === expectedChar) {
+                currentCharIndex++;
+                renderTargetWord(targetWord, currentCharIndex);
+                updateScore(2);
+
+                // Si ha completado la palabra entera
+                if (currentCharIndex >= targetWord.length) {
+                    confetti({ particleCount: 40, spread: 50, origin: { y: 0.6 } });
+                    currentItemIndex++;
+                    currentCharIndex = 0;
+
+                    // Si ha completado toda la lección
+                    if (currentItemIndex >= lessons[currentLessonIndex].items.length) {
+                        confetti({ particleCount: 120, spread: 80, origin: { y: 0.5 } });
+                        currentLessonIndex = (currentLessonIndex + 1) % lessons.length;
+                        currentItemIndex = 0;
+                    }
+                    setTimeout(loadCurrentItem, 300);
+                }
+            } else {
+                // Feedback visual de fallo (pequeño cambio de color en el contenedor)
+                const display = document.getElementById('target-display');
+                display.classList.add('bg-rose-50', 'border-rose-300');
+                setTimeout(() => display.classList.remove('bg-rose-50', 'border-rose-300'), 150);
             }
         });
 
