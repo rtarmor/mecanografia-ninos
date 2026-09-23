@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AstroMeca - Academia de Mecanografía Espacial</title>
+    <title>InlineStick Meca - Academia de Hockey Línea</title>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Fredoka -->
@@ -14,25 +14,26 @@
         body { font-family: 'Fredoka', sans-serif; }
         .key { transition: all 0.08s ease; }
         .key-active { transform: scale(0.90); background-color: #38bdf8 !important; color: white !important; box-shadow: 0 0 15px #38bdf8; }
+        .key-memory { background-color: #f59e0b !important; color: white !important; transform: scale(1.08); box-shadow: 0 0 20px #f59e0b; }
     </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-cyan-500 selection:text-white">
+<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-sky-500 selection:text-white">
 
-    <!-- HEADER ESTILIZADO TIPO ACADEMIA ESPACIAL -->
-    <header class="bg-slate-900 border-b border-slate-800 py-4 px-6 flex justify-between items-center max-w-5xl mx-auto w-full rounded-b-2xl shadow-xl mt-1">
+    <!-- HEADER ESTILIZADO DE HOCKEY -->
+    <header class="bg-slate-900 border-b border-sky-900/50 py-4 px-6 flex justify-between items-center max-w-5xl mx-auto w-full rounded-b-2xl shadow-xl mt-1">
         <div class="flex items-center space-x-3">
-            <span class="text-4xl animate-pulse">🛸</span>
+            <span class="text-4xl animate-bounce">🏒</span>
             <div>
-                <h1 class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-indigo-400 bg-clip-text text-transparent">AstroMeca</h1>
-                <p class="text-xs text-slate-400">Entrenamiento de Pilotos de Teclado</p>
+                <h1 class="text-2xl font-bold bg-gradient-to-r from-sky-400 to-blue-500 bg-clip-text text-transparent">InlineStick Meca</h1>
+                <p class="text-xs text-sky-300">Academia de Mecanografía y Hockey Línea</p>
             </div>
         </div>
         <div class="flex items-center space-x-4">
             <div class="bg-slate-800 border border-slate-700 px-4 py-1.5 rounded-full font-bold flex items-center text-amber-400 shadow-inner">
-                ⭐ <span id="score" class="ml-1 text-lg">0</span> pts
+                🏆 <span id="score" class="ml-1 text-lg">0</span> pts
             </div>
-            <div id="user-badge" class="bg-cyan-950 border border-cyan-800 text-cyan-300 px-4 py-1.5 rounded-full font-semibold text-xs tracking-wide uppercase">
-                Rango: Aspirante 🚀
+            <div id="user-badge" class="bg-sky-950 border border-sky-800 text-sky-300 px-4 py-1.5 rounded-full font-semibold text-xs tracking-wide uppercase">
+                Categoría: Novato en Patines 🛼
             </div>
         </div>
     </header>
@@ -41,52 +42,80 @@
     <main class="max-w-4xl mx-auto px-4 py-8 w-full flex-grow flex flex-col items-center">
 
         <!-- MENÚ PRINCIPAL -->
-        <div id="main-menu" class="w-full text-center py-6">
-            <div class="inline-block bg-cyan-950 border border-cyan-800 text-cyan-300 text-xs px-3 py-1 rounded-full mb-3 uppercase tracking-widest font-semibold">Base Estelar Activa</div>
-            <h2 class="text-4xl font-extrabold text-white mb-3">Elige tu Misión de Vuelo</h2>
-            <p class="text-slate-400 mb-10 max-w-lg mx-auto">Domina el teclado con los dedos correctos y conviértete en el mejor piloto de la galaxia.</p>
+        <div id="main-menu" class="w-full text-center py-4">
+            <div class="inline-block bg-sky-950 border border-sky-800 text-sky-300 text-xs px-3 py-1 rounded-full mb-3 uppercase tracking-widest font-semibold">Pista Central Habilitada</div>
+            <h2 class="text-3xl font-extrabold text-white mb-2">Selecciona tu Ejercicio o Dril de Hockey</h2>
+            <p class="text-slate-400 mb-8 max-w-lg mx-auto text-sm">Domina el teclado como dominas el stick y el puck en la pista de línea.</p>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
-                <button onclick="startLessons()" class="group bg-gradient-to-br from-cyan-600 to-blue-700 hover:from-cyan-500 hover:to-blue-600 p-6 rounded-3xl shadow-xl transform hover:-translate-y-1 transition duration-200 flex flex-col items-center text-left w-full border border-cyan-400/30">
-                    <span class="text-5xl mb-4 group-hover:scale-110 transition">🛰️</span>
-                    <span class="text-2xl font-bold text-white">Misiones de Vuelo</span>
-                    <span class="text-xs text-cyan-200 mt-1">Aprende paso a paso con las filas del teclado y guías visuales.</span>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 max-w-3xl mx-auto">
+                <!-- Lecciones -->
+                <button onclick="startLessons()" class="group bg-gradient-to-br from-sky-600 to-blue-800 hover:from-sky-500 hover:to-blue-700 p-4 rounded-2xl shadow-xl transform hover:-translate-y-1 transition duration-200 flex flex-col items-center text-center border border-sky-400/30">
+                    <span class="text-3xl mb-2 group-hover:scale-110 transition">📋</span>
+                    <span class="text-lg font-bold text-white">Driles Tácticos</span>
+                    <span class="text-[11px] text-sky-200 mt-1">Aprende la colocación correcta de los dedos.</span>
                 </button>
-                <button onclick="startMiniGame()" class="group bg-gradient-to-br from-purple-600 to-pink-700 hover:from-purple-500 hover:to-pink-600 p-6 rounded-3xl shadow-xl transform hover:-translate-y-1 transition duration-200 flex flex-col items-center text-left w-full border border-purple-400/30">
-                    <span class="text-5xl mb-4 group-hover:scale-110 transition">☄️</span>
-                    <span class="text-2xl font-bold text-white">Tormenta de Meteoritos</span>
-                    <span class="text-xs text-purple-200 mt-1">Minijuego arcade de velocidad para destruir palabras que caen.</span>
+                <!-- Minijuego 1: Meteoritos -> Lluvia de Pucks -->
+                <button onclick="startMiniGame()" class="group bg-gradient-to-br from-blue-600 to-indigo-800 hover:from-blue-500 hover:to-indigo-700 p-4 rounded-2xl shadow-xl transform hover:-translate-y-1 transition duration-200 flex flex-col items-center text-center border border-blue-400/30">
+                    <span class="text-3xl mb-2 group-hover:scale-110 transition">🏒</span>
+                    <span class="text-lg font-bold text-white">Lluvia de Pucks</span>
+                    <span class="text-[11px] text-blue-200 mt-1">Bloquea los discos que caen a la portería.</span>
+                </button>
+                <!-- Minijuego 2: Caza de Topos -> Portero Rápido -->
+                <button onclick="startMoleGame()" class="group bg-gradient-to-br from-amber-600 to-orange-700 hover:from-amber-500 hover:to-orange-600 p-4 rounded-2xl shadow-xl transform hover:-translate-y-1 transition duration-200 flex flex-col items-center text-center border border-amber-400/30">
+                    <span class="text-3xl mb-2 group-hover:scale-110 transition">🥅</span>
+                    <span class="text-lg font-bold text-white">Reflejos de Portero</span>
+                    <span class="text-[11px] text-amber-200 mt-1">Ataja los tiros rápidos a portería.</span>
+                </button>
+                <!-- Minijuego 3: Carrera de Naves -> Escapada en Patines -->
+                <button onclick="startRaceGame()" class="group bg-gradient-to-br from-emerald-600 to-teal-700 hover:from-emerald-500 hover:to-teal-600 p-4 rounded-2xl shadow-xl transform hover:-translate-y-1 transition duration-200 flex flex-col items-center text-center border border-emerald-400/30">
+                    <span class="text-3xl mb-2 group-hover:scale-110 transition">🛼</span>
+                    <span class="text-lg font-bold text-white">Escapada en Patines</span>
+                    <span class="text-[11px] text-emerald-200 mt-1">Escribe rápido para sprintar hacia la meta rival.</span>
+                </button>
+                <!-- Minijuego 4: Memoria Galáctica -> Secuencia de Pases -->
+                <button onclick="startMemoryGame()" class="group bg-gradient-to-br from-indigo-600 to-violet-700 hover:from-indigo-500 hover:to-violet-600 p-4 rounded-2xl shadow-xl transform hover:-translate-y-1 transition duration-200 flex flex-col items-center text-center border border-indigo-400/30">
+                    <span class="text-3xl mb-2 group-hover:scale-110 transition">⚡</span>
+                    <span class="text-lg font-bold text-white">Combinación de Pases</span>
+                    <span class="text-[11px] text-indigo-200 mt-1">Memoriza y repite la jugada combinada.</span>
+                </button>
+                <!-- Minijuego 5: Defensa del Núcleo -> Bloqueo Defensivo -->
+                <button onclick="startDefenseGame()" class="group bg-gradient-to-br from-rose-600 to-red-700 hover:from-rose-500 hover:to-red-600 p-4 rounded-2xl shadow-xl transform hover:-translate-y-1 transition duration-200 flex flex-col items-center text-center border border-rose-400/30">
+                    <span class="text-3xl mb-2 group-hover:scale-110 transition">🛡️</span>
+                    <span class="text-lg font-bold text-white">Bloqueo Defensivo</span>
+                    <span class="text-[11px] text-rose-200 mt-1">Frena el ataque del equipo rival con disparos.</span>
+                </button>
+                <!-- Minijuego 6: Burbujas Cósmicas -> Conos de Agilidad -->
+                <button onclick="startBubbleGame()" class="group bg-gradient-to-br from-cyan-600 to-blue-900 hover:from-cyan-500 hover:to-blue-800 p-4 rounded-2xl shadow-xl transform hover:-translate-y-1 transition duration-200 flex flex-col items-center text-center border border-cyan-400/30 md:col-span-3 max-w-md mx-auto w-full">
+                    <span class="text-3xl mb-2 group-hover:scale-110 transition">🟠</span>
+                    <span class="text-lg font-bold text-white">Slalom de Conos</span>
+                    <span class="text-[11px] text-cyan-200 mt-1">Esquiva los conos pisando la tecla exacta en pista.</span>
                 </button>
             </div>
         </div>
 
-        <!-- CONTENEDOR DE LECCIONES (ESTILO TYPETOPIA) -->
+        <!-- CONTENEDOR DE LECCIONES -->
         <div id="lessons-container" class="w-full hidden flex flex-col items-center">
             <div class="w-full flex justify-between items-center mb-6">
                 <button onclick="backToMenu()" class="bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 px-4 py-2 rounded-xl font-bold shadow transition flex items-center text-sm">
-                    ⬅ Salir al Comando
+                    ⬅ Volver a la Banca
                 </button>
-                <h3 id="lesson-title" class="text-lg font-bold text-cyan-400">Misión 1: Fila Base</h3>
+                <h3 id="lesson-title" class="text-lg font-bold text-sky-400">Dril 1: Posición Base</h3>
                 <span id="lesson-progress" class="text-sm font-semibold bg-slate-900 border border-slate-800 px-3 py-1 rounded-lg text-slate-400">1 / 5</span>
             </div>
 
-            <!-- Panel de Misión / Texto a escribir -->
+            <!-- Panel de Misión -->
             <div class="bg-slate-900 border border-slate-800 w-full rounded-3xl shadow-2xl p-8 mb-6 text-center relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-cyan-500 via-indigo-500 to-purple-500"></div>
-                <div id="target-display" class="text-5xl md:text-6xl font-bold tracking-widest text-white mb-6 bg-slate-950 py-10 rounded-2xl shadow-inner min-h-[140px] flex items-center justify-center border border-slate-800/80">
-                    <!-- Secuencia de letras -->
-                </div>
-                <div class="flex justify-center items-center gap-2 text-cyan-300 bg-cyan-950/40 border border-cyan-900/50 py-2 px-4 rounded-xl max-w-md mx-auto text-xs">
+                <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-sky-500 via-blue-500 to-indigo-500"></div>
+                <div id="target-display" class="text-5xl md:text-6xl font-bold tracking-widest text-white mb-6 bg-slate-950 py-10 rounded-2xl shadow-inner min-h-[140px] flex items-center justify-center border border-slate-800/80"></div>
+                <div class="flex justify-center items-center gap-2 text-sky-300 bg-sky-950/40 border border-sky-900/50 py-2 px-4 rounded-xl max-w-md mx-auto text-xs">
                     <span id="finger-hint-icon" class="text-lg">👆</span>
-                    <span id="finger-hint-text">Usa el dedo índice de la mano izquierda para esta tecla</span>
+                    <span id="finger-hint-text">Usa el dedo correspondiente</span>
                 </div>
             </div>
 
-            <!-- Teclado Visual Avanzado (Con código de colores de dedos) -->
-            <div class="bg-slate-900 border border-slate-800 p-5 rounded-3xl shadow-2xl w-full max-w-3xl flex flex-col gap-2 items-center">
-                <div class="text-[10px] text-slate-500 uppercase tracking-widest mb-1">Guía de Teclado Táctil</div>
-                
-                <!-- Fila 1 -->
+            <!-- Teclado Visual Común -->
+            <div class="keyboard-view bg-slate-900 border border-slate-800 p-5 rounded-3xl shadow-2xl w-full max-w-3xl flex flex-col gap-2 items-center">
+                <div class="text-[10px] text-slate-500 uppercase tracking-widest mb-1">Guía del Stick y Teclado</div>
                 <div class="flex gap-1.5">
                     <div id="key-q" class="key bg-slate-800 text-slate-300 w-11 h-11 rounded-xl flex items-center justify-center font-bold text-sm border border-slate-700">Q</div>
                     <div id="key-w" class="key bg-slate-800 text-slate-300 w-11 h-11 rounded-xl flex items-center justify-center font-bold text-sm border border-slate-700">W</div>
@@ -99,7 +128,6 @@
                     <div id="key-o" class="key bg-slate-800 text-slate-300 w-11 h-11 rounded-xl flex items-center justify-center font-bold text-sm border border-slate-700">O</div>
                     <div id="key-p" class="key bg-slate-800 text-slate-300 w-11 h-11 rounded-xl flex items-center justify-center font-bold text-sm border border-slate-700">P</div>
                 </div>
-                <!-- Fila 2 (Fila Base) -->
                 <div class="flex gap-1.5">
                     <div id="key-a" class="key bg-slate-800 text-slate-300 w-11 h-11 rounded-xl flex items-center justify-center font-bold text-sm border border-slate-700">A</div>
                     <div id="key-s" class="key bg-slate-800 text-slate-300 w-11 h-11 rounded-xl flex items-center justify-center font-bold text-sm border border-slate-700">S</div>
@@ -111,7 +139,6 @@
                     <div id="key-k" class="key bg-slate-800 text-slate-300 w-11 h-11 rounded-xl flex items-center justify-center font-bold text-sm border border-slate-700">K</div>
                     <div id="key-l" class="key bg-slate-800 text-slate-300 w-11 h-11 rounded-xl flex items-center justify-center font-bold text-sm border border-slate-700">L</div>
                 </div>
-                <!-- Fila 3 -->
                 <div class="flex gap-1.5">
                     <div id="key-z" class="key bg-slate-800 text-slate-300 w-11 h-11 rounded-xl flex items-center justify-center font-bold text-sm border border-slate-700">Z</div>
                     <div id="key-x" class="key bg-slate-800 text-slate-300 w-11 h-11 rounded-xl flex items-center justify-center font-bold text-sm border border-slate-700">X</div>
@@ -121,26 +148,105 @@
                     <div id="key-n" class="key bg-slate-800 text-slate-300 w-11 h-11 rounded-xl flex items-center justify-center font-bold text-sm border border-slate-700">N</div>
                     <div id="key-m" class="key bg-slate-800 text-slate-300 w-11 h-11 rounded-xl flex items-center justify-center font-bold text-sm border border-slate-700">M</div>
                 </div>
-                <!-- Espaciador -->
                 <div class="flex gap-1.5 mt-1 w-full justify-center">
-                    <div id="key- " class="key bg-slate-800 text-slate-400 w-72 h-10 rounded-xl flex items-center justify-center font-bold text-xs border border-slate-700">ESPACIO (Pulgares)</div>
+                    <div id="key- " class="key bg-slate-800 text-slate-400 w-72 h-10 rounded-xl flex items-center justify-center font-bold text-xs border border-slate-700">ESPACIO (Manos firmes)</div>
                 </div>
             </div>
         </div>
 
-        <!-- MINIJUEGO DE METEORITOS -->
+        <!-- MINIJUEGO 1: LLUVIA DE PUCKS -->
         <div id="game-container" class="w-full hidden flex flex-col items-center">
             <div class="w-full flex justify-between items-center mb-4">
-                <button onclick="backToMenu()" class="bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 px-4 py-2 rounded-xl font-bold shadow transition flex items-center text-sm">
-                    ⬅ Salir al Comando
-                </button>
-                <div class="text-rose-400 font-bold text-sm bg-slate-900 border border-slate-800 px-4 py-2 rounded-xl">🛡️ Escudo de la Nave: <span id="game-lives">3</span>/3</div>
+                <button onclick="backToMenu()" class="bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 px-4 py-2 rounded-xl font-bold shadow transition flex items-center text-sm">⬅ Volver a la Banca</button>
+                <div class="text-rose-400 font-bold text-sm bg-slate-900 border border-slate-800 px-4 py-2 rounded-xl">🛡️ Vidas Portería: <span id="game-lives">3</span>/3</div>
             </div>
-            <div id="game-arena" class="relative bg-slate-900 border border-slate-800 w-full h-96 rounded-3xl overflow-hidden shadow-2xl flex items-end justify-center p-6">
-                <div id="falling-word" class="absolute top-0 text-3xl font-extrabold text-amber-400 tracking-wider transition-all duration-75">gato</div>
+            <div class="relative bg-slate-900 border border-sky-900/50 w-full h-96 rounded-3xl overflow-hidden shadow-2xl flex items-end justify-center p-6">
+                <div id="falling-word" class="absolute top-0 text-3xl font-extrabold text-sky-400 tracking-wider transition-all duration-75">puck</div>
                 <div class="absolute bottom-4 w-full max-w-md px-4">
-                    <input type="text" id="game-input" autofocus class="bg-slate-950 text-cyan-300 text-center text-xl font-bold py-3 px-6 rounded-2xl outline-none border border-cyan-500/50 w-full shadow-inner placeholder:text-slate-600" placeholder="Escribe el meteorito para destruirlo...">
+                    <input type="text" id="game-input" autofocus class="bg-slate-950 text-sky-300 text-center text-xl font-bold py-3 px-6 rounded-2xl outline-none border border-sky-500/50 w-full shadow-inner placeholder:text-slate-600" placeholder="Escribe la palabra del puck...">
                 </div>
+            </div>
+        </div>
+
+        <!-- MINIJUEGO 2: REFLEJOS DE PORTERO -->
+        <div id="mole-container" class="w-full hidden flex flex-col items-center">
+            <div class="w-full flex justify-between items-center mb-4">
+                <button onclick="backToMenu()" class="bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 px-4 py-2 rounded-xl font-bold shadow transition flex items-center text-sm">⬅ Volver a la Banca</button>
+                <div class="text-amber-400 font-bold text-sm bg-slate-900 border border-slate-800 px-4 py-2 rounded-xl">⏰ Tiempo: <span id="mole-time">30</span>s</div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 w-full h-96 rounded-3xl shadow-2xl flex flex-col items-center justify-center p-6 text-center">
+                <p class="text-slate-400 text-sm mb-4">¡Bloquea el tiro a portería pulsando la letra exacta antes de que entre!</p>
+                <div id="mole-box" class="w-36 h-36 bg-amber-500/20 border-4 border-amber-400 rounded-3xl flex items-center justify-center text-7xl font-black text-amber-300 shadow-[0_0_30px_rgba(251,191,36,0.3)] mb-6 animate-bounce">A</div>
+                <div class="text-xs text-slate-500">Usa la tecla correspondiente del teclado</div>
+            </div>
+        </div>
+
+        <!-- MINIJUEGO 3: ESCAPADA EN PATINES -->
+        <div id="race-container" class="w-full hidden flex flex-col items-center">
+            <div class="w-full flex justify-between items-center mb-4">
+                <button onclick="backToMenu()" class="bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 px-4 py-2 rounded-xl font-bold shadow transition flex items-center text-sm">⬅ Volver a la Banca</button>
+                <div class="text-emerald-400 font-bold text-sm bg-slate-900 border border-slate-800 px-4 py-2 rounded-xl">🏁 Avance en Pista: <span id="race-progress">0</span>%</div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 w-full h-96 rounded-3xl shadow-2xl flex flex-col items-center justify-between p-8 text-center">
+                <div class="w-full bg-slate-950 h-16 rounded-2xl relative border border-slate-800 overflow-hidden flex items-center px-4">
+                    <div id="ship-icon" class="text-3xl transition-all duration-300 absolute left-4">🛼</div>
+                    <div class="absolute right-6 text-2xl">🥅</div>
+                </div>
+                <div class="w-full max-w-lg bg-slate-950 p-6 rounded-2xl border border-emerald-500/30 shadow-inner">
+                    <div class="text-xs text-slate-400 mb-2">Escribe este pase para acelerar hacia la portería:</div>
+                    <div id="race-word" class="text-4xl font-extrabold text-emerald-400 tracking-wider mb-4">patin</div>
+                    <input type="text" id="race-input" class="bg-slate-900 text-sky-300 text-center text-xl font-bold py-3 px-6 rounded-xl outline-none border border-sky-500/40 w-full shadow-inner" placeholder="Escribe aquí rápido...">
+                </div>
+            </div>
+        </div>
+
+        <!-- MINIJUEGO 4: COMBINACIÓN DE PASES -->
+        <div id="memory-container" class="w-full hidden flex flex-col items-center">
+            <div class="w-full flex justify-between items-center mb-4">
+                <button onclick="backToMenu()" class="bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 px-4 py-2 rounded-xl font-bold shadow transition flex items-center text-sm">⬅ Volver a la Banca</button>
+                <div class="text-indigo-400 font-bold text-sm bg-slate-900 border border-slate-800 px-4 py-2 rounded-xl">⚡ Nivel de Jugada: <span id="memory-level">1</span></div>
+            </div>
+            <div class="bg-slate-900 border border-slate-800 w-full h-96 rounded-3xl shadow-2xl flex flex-col items-center justify-center p-6 text-center">
+                <div id="memory-status" class="text-lg font-bold text-indigo-300 mb-6 bg-indigo-950/50 border border-indigo-900 py-2 px-6 rounded-xl">Observa la combinación de pases...</div>
+                <div class="flex gap-3 justify-center">
+                    <div id="mem-a" class="w-16 h-16 bg-slate-800 border border-slate-700 rounded-2xl flex items-center justify-center text-2xl font-bold text-white shadow-lg transition">A</div>
+                    <div id="mem-s" class="w-16 h-16 bg-slate-800 border border-slate-700 rounded-2xl flex items-center justify-center text-2xl font-bold text-white shadow-lg transition">S</div>
+                    <div id="mem-d" class="w-16 h-16 bg-slate-800 border border-slate-700 rounded-2xl flex items-center justify-center text-2xl font-bold text-white shadow-lg transition">D</div>
+                    <div id="mem-f" class="w-16 h-16 bg-slate-800 border border-slate-700 rounded-2xl flex items-center justify-center text-2xl font-bold text-white shadow-lg transition">F</div>
+                </div>
+                <div class="text-xs text-slate-500 mt-6">Presiona las teclas A, S, D, F en el orden exacto de la jugada táctica.</div>
+            </div>
+        </div>
+
+        <!-- MINIJUEGO 5: BLOQUEO DEFENSIVO -->
+        <div id="defense-container" class="w-full hidden flex flex-col items-center">
+            <div class="w-full flex justify-between items-center mb-4">
+                <button onclick="backToMenu()" class="bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 px-4 py-2 rounded-xl font-bold shadow transition flex items-center text-sm">⬅ Volver a la Banca</button>
+                <div class="text-rose-400 font-bold text-sm bg-slate-900 border border-slate-800 px-4 py-2 rounded-xl">🛡️ Resistencia: <span id="defense-health">100</span>%</div>
+            </div>
+            <div class="relative bg-slate-900 border border-slate-800 w-full h-96 rounded-3xl overflow-hidden shadow-2xl flex flex-col justify-between p-6">
+                <div class="flex justify-between items-center w-full">
+                    <div id="enemy-node" class="bg-rose-950/80 border border-rose-800 px-5 py-3 rounded-2xl text-rose-300 text-2xl font-black shadow-lg animate-pulse">rival</div>
+                    <div class="text-4xl">🏒</div>
+                </div>
+                <div class="text-center text-xs text-slate-500">Línea Defensiva Propia</div>
+                <div class="w-full">
+                    <input type="text" id="defense-input" class="bg-slate-950 text-rose-400 text-center text-xl font-bold py-3 px-6 rounded-2xl outline-none border border-rose-500/50 w-full shadow-inner placeholder:text-slate-700" placeholder="Escribe para frenar al atacante...">
+                </div>
+            </div>
+        </div>
+
+        <!-- MINIJUEGO 6: SLALOM DE CONOS -->
+        <div id="bubble-container" class="w-full hidden flex flex-col items-center">
+            <div class="w-full flex justify-between items-center mb-4">
+                <button onclick="backToMenu()" class="bg-slate-900 hover:bg-slate-800 text-slate-300 border border-slate-700 px-4 py-2 rounded-xl font-bold shadow transition flex items-center text-sm">⬅ Volver a la Banca</button>
+                <div class="text-sky-400 font-bold text-sm bg-slate-900 border border-slate-800 px-4 py-2 rounded-xl">🟠 Conos Esquivados: <span id="bubble-count">0</span></div>
+            </div>
+            <div id="bubble-area" class="relative bg-slate-900 border border-slate-800 w-full h-96 rounded-3xl overflow-hidden shadow-2xl flex items-center justify-center">
+                <div id="floating-bubble" class="absolute w-24 h-24 bg-gradient-to-tr from-amber-500 to-orange-500 rounded-full flex items-center justify-center text-4xl font-black text-white shadow-[0_0_25px_rgba(245,158,11,0.5)] animate-pulse cursor-pointer">
+                    X
+                </div>
+                <div class="absolute bottom-4 text-xs text-slate-400">Pulsa la letra exacta del cono de agilidad en pista</div>
             </div>
         </div>
 
@@ -148,37 +254,22 @@
 
     <!-- FOOTER -->
     <footer class="text-center py-4 text-xs text-slate-500 border-t border-slate-900">
-        AstroMeca • Sistema de Entrenamiento de Mecanografía Táctica 🌌
+        InlineStick Meca • Sistema Oficial de Entrenamiento de Mecanografía en Hockey Línea 🏒
     </footer>
 
-    <!-- LÓGICA DE LA APLICACIÓN -->
+    <!-- LÓGICA GENERAL Y MINIJUEGOS -->
     <script>
         let score = 0;
         let currentLessonIndex = 0;
         let currentItemIndex = 0;
         let currentCharIndex = 0;
 
-        // Base de datos de misiones con sugerencia de dedos
         const lessons = [
-            { 
-                title: "Misión 1: Fila Base Central (A, S, D, F)", 
-                items: ["as", "df", "fad", "sad"] 
-            },
-            { 
-                title: "Misión 2: Fila Base Derecha (J, K, L)", 
-                items: ["jk", "kl", "dad", "fall"] 
-            },
-            { 
-                title: "Misión 3: Primeras Palabras Galácticas", 
-                items: ["sol", "luna", "casa", "pato", "agua"] 
-            },
-            { 
-                title: "Misión 4: Comandos de Frases", 
-                items: ["el gato", "casa azul"] 
-            }
+            { title: "Dril 1: Fila Base Central (A, S, D, F)", items: ["as", "df", "fad", "sad"] },
+            { title: "Dril 2: Fila Base Derecha (J, K, L)", items: ["jk", "kl", "dad", "fall"] },
+            { title: "Dril 3: Vocabulario de Hockey (Stick, Puck)", items: ["puck", "stick", "gol", "pista", "linea"] }
         ];
 
-        // Guía de dedos orientativa para los niños
         const fingerHints = {
             'a': { finger: "Meñique izquierdo", icon: "🖐️" },
             's': { finger: "Anular izquierdo", icon: "🖐️" },
@@ -187,57 +278,44 @@
             'j': { finger: "Índice derecho", icon: "☝️" },
             'k': { finger: "Medio derecho", icon: "🖐️" },
             'l': { finger: "Anular derecho", icon: "🖐️" },
-            ' ': { finger: "Pulgares (Cualquiera)", icon: "👍" }
+            ' ': { finger: "Pulgares", icon: "👍" }
         };
-
-        let gameInterval;
-        let wordTop = 0;
-        let currentWord = "gato";
-        let lives = 3;
-        const wordsList = ["gato", "perro", "sol", "luna", "agua", "casa", "mesa", "flor", "libro", "juego", "nave", "astro"];
 
         function updateScore(points) {
             score += points;
             document.getElementById('score').innerText = score;
-            if (score > 25) document.getElementById('user-badge').innerText = "Rango: Piloto Estelar 🌠";
-            if (score > 60) document.getElementById('user-badge').innerText = "Rango: Comandante de Flota 👑";
-        }
-
-        function startLessons() {
-            document.getElementById('main-menu').classList.add('hidden');
-            document.getElementById('lessons-container').classList.remove('hidden');
-            currentLessonIndex = 0;
-            currentItemIndex = 0;
-            currentCharIndex = 0;
-            loadCurrentItem();
-        }
-
-        function startMiniGame() {
-            document.getElementById('main-menu').classList.add('hidden');
-            document.getElementById('game-container').classList.remove('hidden');
-            lives = 3;
-            document.getElementById('game-lives').innerText = lives;
-            nextGameWord();
-            document.getElementById('game-input').value = "";
-            document.getElementById('game-input').focus();
-            
-            clearInterval(gameInterval);
-            wordTop = 0;
-            gameInterval = setInterval(gameLoop, 50);
+            if (score > 30) document.getElementById('user-badge').innerText = "Categoría: Jugador Titular 🏅";
+            if (score > 80) document.getElementById('user-badge').innerText = "Categoría: Capitán de Hockey Línea 👑";
         }
 
         function backToMenu() {
             document.getElementById('lessons-container').classList.add('hidden');
             document.getElementById('game-container').classList.add('hidden');
+            document.getElementById('mole-container').classList.add('hidden');
+            document.getElementById('race-container').classList.add('hidden');
+            document.getElementById('memory-container').classList.add('hidden');
+            document.getElementById('defense-container').classList.add('hidden');
+            document.getElementById('bubble-container').classList.add('hidden');
             document.getElementById('main-menu').classList.remove('hidden');
+            
             clearInterval(gameInterval);
+            clearInterval(moleInterval);
+            clearTimeout(moleTimeout);
+            clearInterval(memoryTimeoutInterval);
+        }
+
+        // --- MODO LECCIONES ---
+        function startLessons() {
+            document.getElementById('main-menu').classList.add('hidden');
+            document.getElementById('lessons-container').classList.remove('hidden');
+            currentLessonIndex = 0; currentItemIndex = 0; currentCharIndex = 0;
+            loadCurrentItem();
         }
 
         function loadCurrentItem() {
             const lesson = lessons[currentLessonIndex];
             document.getElementById('lesson-title').innerText = lesson.title;
             document.getElementById('lesson-progress').innerText = `${currentItemIndex + 1} / ${lesson.items.length}`;
-            
             const targetWord = lesson.items[currentItemIndex];
             renderTargetWord(targetWord, currentCharIndex);
             updateFingerHint(targetWord[currentCharIndex]);
@@ -249,69 +327,35 @@
             for (let i = 0; i < word.length; i++) {
                 const span = document.createElement('span');
                 span.innerText = word[i] === ' ' ? '␣' : word[i];
-                if (i < typedIndex) {
-                    span.className = "text-emerald-400 drop-shadow-[0_0_10px_rgba(52,211,153,0.5)]";
-                } else if (i === typedIndex) {
-                    span.className = "text-cyan-400 underline decoration-cyan-500 animate-pulse";
-                } else {
-                    span.className = "text-slate-600";
-                }
+                if (i < typedIndex) span.className = "text-emerald-400";
+                else if (i === typedIndex) span.className = "text-sky-400 underline decoration-sky-500 animate-pulse";
+                else span.className = "text-slate-600";
                 container.appendChild(span);
             }
         }
 
         function updateFingerHint(char) {
-            const hint = fingerHints[char] || { finger: "Dedo correspondiente de la fila base", icon: "⌨️" };
+            const hint = fingerHints[char] || { finger: "Dedo correspondiente", icon: "⌨️" };
             document.getElementById('finger-hint-icon').innerText = hint.icon;
-            document.getElementById('finger-hint-text').innerText = `Usa el ${hint.finger} para pulsar '${char === ' ' ? 'ESPACIO' : char.toUpperCase()}'`;
+            document.getElementById('finger-hint-text').innerText = `Usa el ${hint.finger} para '${char === ' ' ? 'ESPACIO' : char.toUpperCase()}'`;
         }
 
-        // Control de teclado para lecciones
-        document.addEventListener('keydown', (e) => {
-            if (document.getElementById('lessons-container').classList.contains('hidden')) return;
-            
-            let key = e.key.toLowerCase();
-            if (e.key === ' ') key = ' ';
+        // --- MINIJUEGO 1: LLUVIA DE PUCKS ---
+        let gameInterval;
+        let wordTop = 0;
+        let currentWord = "puck";
+        let lives = 3;
+        const wordsList = ["puck", "stick", "gol", "pista", "linea", "patin", "casco", "guantes", "arbitro", "equipo", "pase", "tiro"];
 
-            highlightKey(key === ' ' ? ' ' : key);
-
-            const targetWord = lessons[currentLessonIndex].items[currentItemIndex];
-            const expectedChar = targetWord[currentCharIndex];
-
-            if (key === expectedChar) {
-                currentCharIndex++;
-                updateScore(3);
-
-                if (currentCharIndex >= targetWord.length) {
-                    confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } });
-                    currentItemIndex++;
-                    currentCharIndex = 0;
-
-                    if (currentItemIndex >= lessons[currentLessonIndex].items.length) {
-                        confetti({ particleCount: 150, spread: 90, origin: { y: 0.5 } });
-                        currentLessonIndex = (currentLessonIndex + 1) % lessons.length;
-                        currentItemIndex = 0;
-                    }
-                }
-                loadCurrentItem();
-            } else {
-                const display = document.getElementById('target-display');
-                display.classList.add('border-rose-500', 'bg-rose-950/30');
-                setTimeout(() => display.classList.remove('border-rose-500', 'bg-rose-950/30'), 150);
-            }
-        });
-
-        // Minijuego detector
-        const gameInput = document.getElementById('game-input');
-        if (gameInput) {
-            gameInput.addEventListener('input', (e) => {
-                if (e.target.value.trim().toLowerCase() === currentWord) {
-                    updateScore(10);
-                    confetti({ particleCount: 40, spread: 50, origin: { y: 0.7 } });
-                    e.target.value = "";
-                    nextGameWord();
-                }
-            });
+        function startMiniGame() {
+            document.getElementById('main-menu').classList.add('hidden');
+            document.getElementById('game-container').classList.remove('hidden');
+            lives = 3; document.getElementById('game-lives').innerText = lives;
+            nextGameWord();
+            document.getElementById('game-input').value = "";
+            document.getElementById('game-input').focus();
+            clearInterval(gameInterval); wordTop = 0;
+            gameInterval = setInterval(gameLoop, 50);
         }
 
         function nextGameWord() {
@@ -323,19 +367,261 @@
         function gameLoop() {
             if (document.getElementById('game-container').classList.contains('hidden')) return;
             wordTop += 2.5;
-            const wordEl = document.getElementById('falling-word');
-            wordEl.style.top = wordTop + 'px';
-
+            document.getElementById('falling-word').style.top = wordTop + 'px';
             if (wordTop > 280) {
-                lives--;
-                document.getElementById('game-lives').innerText = lives;
+                lives--; document.getElementById('game-lives').innerText = lives;
                 nextGameWord();
-                if (lives <= 0) {
-                    alert("⚠️ ¡Impacto crítico! Escudos agotados. Puntuación final: " + score);
-                    backToMenu();
-                }
+                if (lives <= 0) { alert("⚠️ ¡Gol en contra! Vidas de portería agotadas."); backToMenu(); }
             }
         }
+
+        const gameInput = document.getElementById('game-input');
+        if (gameInput) {
+            gameInput.addEventListener('input', (e) => {
+                if (e.target.value.trim().toLowerCase() === currentWord) {
+                    updateScore(10);
+                    confetti({ particleCount: 40, spread: 50, origin: { y: 0.7 } });
+                    e.target.value = ""; nextGameWord();
+                }
+            });
+        }
+
+        // --- MINIJUEGO 2: REFLEJOS DE PORTERO ---
+        let moleInterval, moleTimeout;
+        let currentMoleChar = 'a';
+        let moleTimeLeft = 30;
+        const alphabetChars = ['a', 's', 'd', 'f', 'j', 'k', 'l', 'e', 'i', 'o'];
+
+        function startMoleGame() {
+            document.getElementById('main-menu').classList.add('hidden');
+            document.getElementById('mole-container').classList.remove('hidden');
+            moleTimeLeft = 30; document.getElementById('mole-time').innerText = moleTimeLeft;
+            nextMole();
+            clearInterval(moleInterval);
+            moleInterval = setInterval(() => {
+                moleTimeLeft--; document.getElementById('mole-time').innerText = moleTimeLeft;
+                if (moleTimeLeft <= 0) {
+                    clearInterval(moleInterval); clearTimeout(moleTimeout);
+                    alert("⏰ ¡Fin del tiempo de partido! Puntos de portero: " + score); backToMenu();
+                }
+            }, 1000);
+        }
+
+        function nextMole() {
+            if (document.getElementById('mole-container').classList.contains('hidden')) return;
+            currentMoleChar = alphabetChars[Math.floor(Math.random() * alphabetChars.length)];
+            document.getElementById('mole-box').innerText = currentMoleChar.toUpperCase();
+            clearTimeout(moleTimeout);
+            moleTimeout = setTimeout(nextMole, 2500);
+        }
+
+        // --- MINIJUEGO 3: ESCAPADA EN PATINES ---
+        let raceProgress = 0;
+        let currentRaceWord = "patin";
+        const raceWords = ["velocidad", "patinaje", "delantera", "ataque", "stick", "linea", "impulso", "porteria"];
+
+        function startRaceGame() {
+            document.getElementById('main-menu').classList.add('hidden');
+            document.getElementById('race-container').classList.remove('hidden');
+            raceProgress = 0; document.getElementById('race-progress').innerText = 0;
+            document.getElementById('ship-icon').style.left = "4%";
+            nextRaceWord();
+            document.getElementById('race-input').value = "";
+            document.getElementById('race-input').focus();
+        }
+
+        function nextRaceWord() {
+            currentRaceWord = raceWords[Math.floor(Math.random() * raceWords.length)];
+            document.getElementById('race-word').innerText = currentRaceWord;
+        }
+
+        const raceInput = document.getElementById('race-input');
+        if (raceInput) {
+            raceInput.addEventListener('input', (e) => {
+                if (e.target.value.trim().toLowerCase() === currentRaceWord) {
+                    updateScore(15);
+                    raceProgress += 20;
+                    document.getElementById('race-progress').innerText = raceProgress;
+                    document.getElementById('ship-icon').style.left = Math.min(raceProgress * 4.2, 85) + "%";
+                    confetti({ particleCount: 30, spread: 40, origin: { y: 0.6 } });
+                    e.target.value = "";
+                    if (raceProgress >= 100) {
+                        alert("🏆 ¡Gran escapada! ¡Gol anotado!");
+                        backToMenu();
+                    } else {
+                        nextRaceWord();
+                    }
+                }
+            });
+        }
+
+        // --- MINIJUEGO 4: COMBINACIÓN DE PASES ---
+        let memoryLevel = 1;
+        let memorySequence = [];
+        let playerMemoryIndex = 0;
+        let isShowingSequence = false;
+        let memoryTimeoutInterval;
+        const memKeys = ['a', 's', 'd', 'f'];
+
+        function startMemoryGame() {
+            document.getElementById('main-menu').classList.add('hidden');
+            document.getElementById('memory-container').classList.remove('hidden');
+            memoryLevel = 1;
+            document.getElementById('memory-level').innerText = memoryLevel;
+            nextMemoryRound();
+        }
+
+        function nextMemoryRound() {
+            memorySequence = [];
+            playerMemoryIndex = 0;
+            for (let i = 0; i < memoryLevel + 2; i++) {
+                memorySequence.push(memKeys[Math.floor(Math.random() * memKeys.length)]);
+            }
+            playSequence();
+        }
+
+        function playSequence() {
+            isShowingSequence = true;
+            document.getElementById('memory-status').innerText = "⚡ Observa la combinación de pases...";
+            let i = 0;
+            memoryTimeoutInterval = setInterval(() => {
+                if (i < memorySequence.length) {
+                    let k = memorySequence[i];
+                    flashMemKey(k);
+                    i++;
+                } else {
+                    clearInterval(memoryTimeoutInterval);
+                    isShowingSequence = false;
+                    document.getElementById('memory-status').innerText = "🏒 ¡Tu turno! Repite la jugada";
+                }
+            }, 800);
+        }
+
+        function flashMemKey(key) {
+            let el = document.getElementById('mem-' + key);
+            if (el) {
+                el.classList.add('key-memory');
+                setTimeout(() => el.classList.remove('key-memory'), 400);
+            }
+        }
+
+        // --- MINIJUEGO 5: BLOQUEO DEFENSIVO ---
+        let defenseHealth = 100;
+        let currentDefenseWord = "rival";
+        const defenseWords = ["defensa", "bloqueo", "rival", "penalti", "corte", "cobertura", "marca", "portero"];
+
+        function startDefenseGame() {
+            document.getElementById('main-menu').classList.add('hidden');
+            document.getElementById('defense-container').classList.remove('hidden');
+            defenseHealth = 100; document.getElementById('defense-health').innerText = defenseHealth;
+            nextDefenseWord();
+            document.getElementById('defense-input').value = "";
+            document.getElementById('defense-input').focus();
+        }
+
+        function nextDefenseWord() {
+            currentDefenseWord = defenseWords[Math.floor(Math.random() * defenseWords.length)];
+            document.getElementById('enemy-node').innerText = currentDefenseWord;
+        }
+
+        const defenseInput = document.getElementById('defense-input');
+        if (defenseInput) {
+            defenseInput.addEventListener('input', (e) => {
+                if (e.target.value.trim().toLowerCase() === currentDefenseWord) {
+                    updateScore(12);
+                    confetti({ particleCount: 25, spread: 45, origin: { y: 0.7 } });
+                    e.target.value = "";
+                    nextDefenseWord();
+                }
+            });
+        }
+
+        // --- MINIJUEGO 6: SLALOM DE CONOS ---
+        let bubbleCount = 0;
+        let currentBubbleChar = 'x';
+        const bubbleChars = ['q','w','e','r','t','y','u','i','o','p','a','s','d','f','g','h','j','k','l','z','x','c','v','b','n','m'];
+
+        function startBubbleGame() {
+            document.getElementById('main-menu').classList.add('hidden');
+            document.getElementById('bubble-container').classList.remove('hidden');
+            bubbleCount = 0; document.getElementById('bubble-count').innerText = bubbleCount;
+            nextBubble();
+        }
+
+        function nextBubble() {
+            if (document.getElementById('bubble-container').classList.contains('hidden')) return;
+            currentBubbleChar = bubbleChars[Math.floor(Math.random() * bubbleChars.length)];
+            let bubble = document.getElementById('floating-bubble');
+            bubble.innerText = currentBubbleChar.toUpperCase();
+            let randomX = Math.floor(Math.random() * 260) - 130;
+            let randomY = Math.floor(Math.random() * 120) - 60;
+            bubble.style.transform = `translate(${randomX}px, ${randomY}px) scale(1)`;
+        }
+
+        // --- CONTROL GLOBAL DE TECLADO ---
+        document.addEventListener('keydown', (e) => {
+            let key = e.key.toLowerCase();
+            if (e.key === ' ') key = ' ';
+
+            highlightKey(key === ' ' ? ' ' : key);
+
+            // 1. Driles / Lecciones
+            if (!document.getElementById('lessons-container').classList.contains('hidden')) {
+                const targetWord = lessons[currentLessonIndex].items[currentItemIndex];
+                const expectedChar = targetWord[currentCharIndex];
+                if (key === expectedChar) {
+                    currentCharIndex++;
+                    updateScore(3);
+                    if (currentCharIndex >= targetWord.length) {
+                        confetti({ particleCount: 50, spread: 60, origin: { y: 0.6 } });
+                        currentItemIndex++; currentCharIndex = 0;
+                        if (currentItemIndex >= lessons[currentLessonIndex].items.length) {
+                            currentLessonIndex = (currentLessonIndex + 1) % lessons.length;
+                            currentItemIndex = 0;
+                        }
+                    }
+                    loadCurrentItem();
+                }
+            }
+
+            // 2. Reflejos de Portero
+            if (!document.getElementById('mole-container').classList.contains('hidden')) {
+                if (key === currentMoleChar) {
+                    updateScore(5);
+                    confetti({ particleCount: 20, spread: 35, origin: { y: 0.6 } });
+                    nextMole();
+                }
+            }
+
+            // 4. Combinación de Pases
+            if (!document.getElementById('memory-container').classList.contains('hidden') && !isShowingSequence) {
+                if (key === memorySequence[playerMemoryIndex]) {
+                    flashMemKey(key);
+                    playerMemoryIndex++;
+                    updateScore(4);
+                    if (playerMemoryIndex >= memorySequence.length) {
+                        confetti({ particleCount: 60, spread: 70, origin: { y: 0.5 } });
+                        memoryLevel++;
+                        document.getElementById('memory-level').innerText = memoryLevel;
+                        setTimeout(nextMemoryRound, 1000);
+                    }
+                } else {
+                    document.getElementById('memory-status').innerText = "❌ ¡Pase interceptado! Reiniciando jugada...";
+                    setTimeout(nextMemoryRound, 1200);
+                }
+            }
+
+            // 6. Slalom de Conos
+            if (!document.getElementById('bubble-container').classList.contains('hidden')) {
+                if (key === currentBubbleChar) {
+                    bubbleCount++;
+                    document.getElementById('bubble-count').innerText = bubbleCount;
+                    updateScore(5);
+                    confetti({ particleCount: 25, spread: 50, origin: { y: 0.6 } });
+                    nextBubble();
+                }
+            }
+        });
 
         function highlightKey(char) {
             let keyEl = document.getElementById('key-' + char);
